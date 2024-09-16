@@ -7,7 +7,9 @@ import Footer from './components/molecules/Footer';
 import LandingPage from './pages/LandingPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
-import MapPage from './pages/MapPage'
+import MapPage from './pages/MapPage';
+
+
 function App() {
   return (
     <Provider store={store}>
@@ -20,7 +22,6 @@ function App() {
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/projects/:id" element={<ProjectDetailsPage />} />
               <Route path="/map" element={<MapPage />} />
-
             </Routes>
           </main>
           <Footer />

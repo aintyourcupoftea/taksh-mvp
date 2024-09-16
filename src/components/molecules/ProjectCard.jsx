@@ -1,17 +1,29 @@
+// ProjectCard.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import styles from '../../styles/projectcard.module.css';
+import { FaClock } from "react-icons/fa6";
 
-const ProjectCard = ({ id, image, title, description, time }) => (
-  <Link to={`/projects/${id}`} className="block">
-    <div className="max-w-sm rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <img className="w-full" src={image} alt={title} />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base">{description}</p>
-        <p className="text-gray-600 text-sm mt-2">Estimated time: {time}</p>
+const ProjectCard = ({ project }) => {
+  const { title, description, time, image } = project;
+
+  return (
+    <motion.div
+      className={styles['project-card']}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+    >
+      <img src={image} alt={title} className={styles.thumbnail} />
+      <div className={styles.content}>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.description}>{description}</p>
+        <span className={styles.time}>
+          <p>{<FaClock />} {time}</p>
+        </span>
       </div>
-    </div>
-  </Link>
-);
+    </motion.div>
+  );
+};
 
 export default ProjectCard;
