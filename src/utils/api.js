@@ -9,5 +9,5 @@ const api = axios.create({
 });
 
 
-export const getProjects = (params) => api.get(`/api/level/2/projects/`, { params });
-export const getProject = (id) => api.get(`/api/level/${id}/projects/`);
+export const getLevel = (lvl) => api.get(`/api/level/${lvl}`);
+export const getProjects = (lvl, id) => api.get(`/api/level/${lvl}/project/${id}`);

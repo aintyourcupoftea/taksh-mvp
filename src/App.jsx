@@ -8,6 +8,7 @@ import LandingPage from './pages/LandingPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
 import MapPage from './pages/MapPage';
+import "./App.css";
 
 
 function App() {
@@ -20,8 +21,8 @@ function App() {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/projects/:id" element={<ProjectDetailsPage />} />
               <Route path="/map" element={<MapPage />} />
+              <Route path="/level/:lvl/project/:id" element={<ProjectDetailsPage />} />
             </Routes>
           </main>
           <Footer />

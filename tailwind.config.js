@@ -3,8 +3,13 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {},
+  extend: {
+    fontFamily: {
+      poppins: ["Poppins", "sans-serif"],
+      bungee: ["Bungee", "sans-serif"],
+    },
   },
   plugins: [],
-}
+};
+
+

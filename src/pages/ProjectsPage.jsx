@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import ProjectCard from '../components/molecules/ProjectCard';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getProjects } from '../utils/api'; // Import the getProjects function
+import { getLevel } from '../utils/api'; // Import the getProjects function
 import styles from "../styles/projectspage.module.css";
+import { useLocation } from 'react-router-dom';
 
 const formatTime = (time) => {
   if (time <= 24) {
@@ -37,32 +37,37 @@ const cardVariants = {
 };
 
 const ProjectsPage = () => {
-  const { level } = useParams();
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const { levelId } = location.state || {};
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch projects using getProjects
     const fetchProjects = async () => {
       try {
-        const response = await getProjects(); // You can pass params if needed
-        setProjects(response.data); // Adjust if your API response structure is different
+        const response = await getLevel(levelId); // You can pass params if needed
+        if (response.data && Array.isArray(response.data)) {
+          console.log(response.data);
+          setProjects(response.data);
+        }
       } catch (err) {
         setError('Failed to fetch projects.');
       } finally {
         setLoading(false);
       }
     };
-
-    fetchProjects();
-  }, []);
+    if (levelId) {
+      fetchProjects();
+    }
+  }, [levelId]);
 
   return (
     <div className='my-body'>
       <div className={styles['projects-container']}>
         <div className={styles['projects-header']}>
-          <h1 className={styles['projects-title']}>{`Level ${level || 'Projects'}`}</h1>
+          <h1 className={styles['projects-title']}>{`Level ${levelId || 'Projects'}`}</h1>
           <h3 className={styles['projects-subtitle']}>
             No more theory, time to build something dope.
           </h3>
